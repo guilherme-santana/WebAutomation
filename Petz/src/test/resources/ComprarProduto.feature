@@ -5,6 +5,6 @@ Feature: Comprar Produto
 		Given que acesso o site Petz
 		When busco por "coleira" e pressiono Enter
 		Then exibe uma lista de produtos relacionados com "coleira"
-		When escolho "Coleira Petz Azul para Cães"
+		When escolho "Coleira Petz Azul para CÃ£es"
 		Then exibe para o "Tamanho P" o preco de "R$ 39,99"
 		
