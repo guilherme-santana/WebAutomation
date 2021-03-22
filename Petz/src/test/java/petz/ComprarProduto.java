@@ -1,5 +1,7 @@
 package petz;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.concurrent.TimeUnit;
 
 
@@ -11,12 +13,14 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pages.Home;
+import pages.Lista;
 
 public class ComprarProduto {
 
 	String url;
 	WebDriver driver;
 	Home home;
+	Lista lista;
 
 	@Before
 	public void init() {
@@ -28,6 +32,7 @@ public class ComprarProduto {
 		driver.manage().timeouts().implicitlyWait(30000, TimeUnit.MILLISECONDS);
 		
 		home = new Home(driver);
+		lista =new Lista(driver);
 	}
 
 	@After
@@ -48,14 +53,15 @@ public class ComprarProduto {
 	}
 
 	@Then("^exibe uma lista de produtos relacionados com \"([^\"]*)\"$")
-	public void exibe_uma_lista_de_produtos_relacionados_com(String arg1) {
+	public void exibe_uma_lista_de_produtos_relacionados_com(String produto) {
+		assertEquals("RESULTADOS PARA \"" + produto.toUpperCase() + "\"", lista.lerResultados());
 		System.out.println("Passo 3");
 	}
 
 	@When("^escolho \"([^\"]*)\"$")
-	public void escolho(String arg1) {
+	public void escolho(String produto) {
+		lista.clicarNoProduto(produto);
 		System.out.println("Passo 4");
-
 	}
 
 	@Then("^exibe para o \"([^\"]*)\" o preco de \"([^\"]*)\"$")
